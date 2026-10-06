@@ -10,8 +10,6 @@ import { toast } from "react-toastify";
 import Pagination from "@/components/ui/Pagination";
 import Select from "../component/ui/Select";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
-
 // --------------------------------------------------
 // TYPES
 // --------------------------------------------------
@@ -68,15 +66,10 @@ type AdminOrdersResponse = {
 
 const statusTransitions: Record<string, string[]> = {
   pending: ["confirmed", "cancelled"],
-
   confirmed: ["processing", "cancelled"],
-
   processing: ["shipped", "cancelled"],
-
   shipped: ["delivered"],
-
   delivered: [],
-
   cancelled: [],
 };
 
@@ -91,7 +84,7 @@ async function getAdminOrders(
   limit: number,
 ): Promise<AdminOrdersResponse> {
   const response = await fetch(
-    `${API_URL}/api/admin/orders?page=${page}&limit=${limit}`,
+    `/api/admin/orders?page=${page}&limit=${limit}`,
     {
       credentials: "include",
     },
@@ -120,22 +113,19 @@ async function updateOrderStatus({
   orderId: number;
   orderStatus: string;
 }) {
-  const response = await fetch(
-    `${API_URL}/api/admin/orders/${orderId}/status`,
-    {
-      method: "PATCH",
+  const response = await fetch(`/api/admin/orders/${orderId}/status`, {
+    method: "PATCH",
 
-      credentials: "include",
+    credentials: "include",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        orderStatus,
-      }),
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+
+    body: JSON.stringify({
+      orderStatus,
+    }),
+  });
 
   const data = await response.json();
 
@@ -157,22 +147,19 @@ async function updatePaymentStatus({
   orderId: number;
   paymentStatus: string;
 }) {
-  const response = await fetch(
-    `${API_URL}/api/admin/orders/${orderId}/payment-status`,
-    {
-      method: "PATCH",
+  const response = await fetch(`/api/admin/orders/${orderId}/payment-status`, {
+    method: "PATCH",
 
-      credentials: "include",
+    credentials: "include",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        paymentStatus,
-      }),
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+
+    body: JSON.stringify({
+      paymentStatus,
+    }),
+  });
 
   const data = await response.json();
 
@@ -629,6 +616,7 @@ export default function AdminOrdersPage() {
 
                                   ...nextStatuses.map((status) => ({
                                     label: status,
+
                                     value: status,
                                   })),
                                 ]}

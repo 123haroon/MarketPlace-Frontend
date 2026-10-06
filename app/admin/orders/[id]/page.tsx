@@ -5,8 +5,6 @@ import { useParams } from "next/navigation";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
-
 // --------------------------------------------------
 // TYPES
 // --------------------------------------------------
@@ -51,15 +49,10 @@ type Order = {
 
 const statusTransitions: Record<string, string[]> = {
   pending: ["confirmed", "cancelled"],
-
   confirmed: ["processing", "cancelled"],
-
   processing: ["shipped", "cancelled"],
-
   shipped: ["delivered"],
-
   delivered: [],
-
   cancelled: [],
 };
 
@@ -70,7 +63,7 @@ const paymentStatuses = ["pending", "paid", "failed", "refunded"];
 // --------------------------------------------------
 
 async function getAdminOrder(orderId: number): Promise<Order> {
-  const response = await fetch(`${API_URL}/api/admin/orders/${orderId}`, {
+  const response = await fetch(`/api/admin/orders/${orderId}`, {
     credentials: "include",
   });
 
@@ -94,22 +87,19 @@ async function updateOrderStatus({
   orderId: number;
   orderStatus: string;
 }) {
-  const response = await fetch(
-    `${API_URL}/api/admin/orders/${orderId}/status`,
-    {
-      method: "PATCH",
+  const response = await fetch(`/api/admin/orders/${orderId}/status`, {
+    method: "PATCH",
 
-      credentials: "include",
+    credentials: "include",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        orderStatus,
-      }),
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+
+    body: JSON.stringify({
+      orderStatus,
+    }),
+  });
 
   const data = await response.json();
 
@@ -131,22 +121,19 @@ async function updatePaymentStatus({
   orderId: number;
   paymentStatus: string;
 }) {
-  const response = await fetch(
-    `${API_URL}/api/admin/orders/${orderId}/payment-status`,
-    {
-      method: "PATCH",
+  const response = await fetch(`/api/admin/orders/${orderId}/payment-status`, {
+    method: "PATCH",
 
-      credentials: "include",
+    credentials: "include",
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        paymentStatus,
-      }),
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+
+    body: JSON.stringify({
+      paymentStatus,
+    }),
+  });
 
   const data = await response.json();
 

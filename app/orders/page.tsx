@@ -1,12 +1,12 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import { useRouter } from "next/navigation";
+
 import { toast } from "react-toastify";
 
 import Button from "@/components/ui/Butoon";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 type OrderItem = {
   id: number;
@@ -36,7 +36,7 @@ type Order = {
 // --------------------------------------------------
 
 async function getMyOrders(): Promise<Order[]> {
-  const response = await fetch(`${API_URL}/api/orders/my-orders`, {
+  const response = await fetch("/api/orders/my-orders", {
     credentials: "include",
   });
 
@@ -54,8 +54,9 @@ async function getMyOrders(): Promise<Order[]> {
 // --------------------------------------------------
 
 async function cancelOrder(orderId: number) {
-  const response = await fetch(`${API_URL}/api/orders/${orderId}/cancel`, {
+  const response = await fetch(`/api/orders/${orderId}/cancel`, {
     method: "PATCH",
+
     credentials: "include",
   });
 
@@ -70,6 +71,7 @@ async function cancelOrder(orderId: number) {
 
 export default function OrdersPage() {
   const router = useRouter();
+
   const queryClient = useQueryClient();
 
   const {
@@ -78,6 +80,7 @@ export default function OrdersPage() {
     isError,
   } = useQuery({
     queryKey: ["my-orders"],
+
     queryFn: getMyOrders,
   });
 
@@ -118,6 +121,7 @@ export default function OrdersPage() {
               type="button"
               onClick={() => {
                 closeToast?.();
+
                 cancelMutation.mutate(orderId);
               }}
               className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
@@ -144,15 +148,27 @@ export default function OrdersPage() {
     );
   }
 
+  // --------------------------------------------------
+  // LOADING
+  // --------------------------------------------------
+
   if (isPending) {
     return <main className="mx-auto max-w-6xl p-6">Loading orders...</main>;
   }
+
+  // --------------------------------------------------
+  // ERROR
+  // --------------------------------------------------
 
   if (isError) {
     return (
       <main className="mx-auto max-w-6xl p-6">Failed to load orders.</main>
     );
   }
+
+  // --------------------------------------------------
+  // NO ORDERS
+  // --------------------------------------------------
 
   if (orders.length === 0) {
     return (
@@ -165,6 +181,10 @@ export default function OrdersPage() {
       </main>
     );
   }
+
+  // --------------------------------------------------
+  // ACTIVE ORDERS
+  // --------------------------------------------------
 
   const activeOrders = orders.filter(
     (order) => order.orderStatus !== "cancelled",

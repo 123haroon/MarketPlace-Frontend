@@ -3,8 +3,6 @@
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
-
 type OrderItem = {
   id: number;
   orderId: number;
@@ -37,7 +35,7 @@ type Order = {
 };
 
 async function getOrderById(orderId: number): Promise<Order> {
-  const response = await fetch(`${API_URL}/api/orders/${orderId}`, {
+  const response = await fetch(`/api/orders/${orderId}`, {
     credentials: "include",
   });
 

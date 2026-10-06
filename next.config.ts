@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://marketplace-backend-cyan.vercel.app/api/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

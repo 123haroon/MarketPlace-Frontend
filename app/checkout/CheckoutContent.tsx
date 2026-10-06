@@ -1,18 +1,12 @@
 "use client";
 
 import { useMemo, useState, type FormEvent } from "react";
-
 import { useSearchParams } from "next/navigation";
-
 import { useQuery } from "@tanstack/react-query";
 
 import { getProducts } from "@/lib/products";
-
 import { useCartStore } from "@/store/cartStore";
-
 import Button from "@/components/ui/Butoon";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 export default function CheckoutContent() {
   const searchParams = useSearchParams();
@@ -22,7 +16,6 @@ export default function CheckoutContent() {
   // --------------------------------------------------
 
   const cart = useCartStore((state) => state.cart);
-
   const clearCart = useCartStore((state) => state.clearCart);
 
   // --------------------------------------------------
@@ -102,13 +95,9 @@ export default function CheckoutContent() {
     if (checkoutType === "cart") {
       return cart.map((item) => ({
         id: item.id,
-
         name: item.name,
-
         price: item.price,
-
         quantity: item.quantity,
-
         image: item.image,
       }));
     }
@@ -146,7 +135,6 @@ export default function CheckoutContent() {
 
   const subtotal = summaryItems.reduce(
     (total, item) => total + item.price * item.quantity,
-
     0,
   );
 
@@ -280,7 +268,7 @@ export default function CheckoutContent() {
       // API REQUEST
       // ------------------------------------------------
 
-      const response = await fetch(`${API_URL}${endpoint}`, {
+      const response = await fetch(endpoint, {
         method: "POST",
 
         credentials: "include",
