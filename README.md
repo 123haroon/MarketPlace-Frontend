@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MarketStore — Full Stack E-Commerce Application
+
+MarketStore is a modern full-stack e-commerce application built using Next.js, React, TypeScript, Node.js, Express.js, and PostgreSQL.
+
+The application provides a complete online shopping experience with user authentication, product browsing, shopping cart, checkout, order management, and an admin dashboard.
+
+## Features
+
+- **Authentication:** User registration, login, logout, and protected routes
+- **Product Management:** Create, update, delete, and browse products
+- **Shopping Cart:** Add and remove products, manage quantities
+- **Checkout:** Place orders using Cash on Delivery (COD)
+- **Order Management:** View order history and order details
+- **Admin Dashboard:** Manage products, users, and orders
+- **Image Uploads:** Cloudinary integration for product images
+- **Responsive Design:** Mobile-friendly user interface
+
+## Tech Stack
+
+**Frontend**
+- Next.js and React.js
+- TypeScript
+- Tailwind CSS
+- Zustand
+- TanStack Query
+- Axios
+
+**Backend**
+- Node.js
+- Express.js
+- Sequelize ORM
+- REST APIs
+- JWT Authentication
+
+**Database & Services**
+- PostgreSQL (Neon)
+- Cloudinary
+- Vercel
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/123haroon/MarketPlace-Frontend.git
+```
+
+### 2. Navigate to the Project
+
+```bash
+cd MarketPlace-Frontend
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Note:** Full local functionality requires a configured backend service and the necessary environment variables.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Backend Repository
 
-## Learn More
+https://github.com/123haroon/Marketplace-Backend
 
-To learn more about Next.js, take a look at the following resources:
+## Live Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://market-place-frontend-olive.vercel.app
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Developer
 
-## Deploy on Vercel
+**Haroon Asghar**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Full Stack Web Developer specializing in React.js, Next.js, TypeScript, Node.js, Express.js, and PostgreSQL.
